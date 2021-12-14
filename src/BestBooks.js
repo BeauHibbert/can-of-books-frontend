@@ -1,6 +1,8 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import axios from 'axios';
+import './main.css';
+
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,8 @@ class BestBooks extends React.Component {
 
    /* TODO: Make a GET request to your API to fetch books for the logged in user  */
    fetchBooks = async () => {
+  /* TODO: Make a GET request to your API to fetch books for the logged in user  */
+  fetchBooks = async () => {
     try {
       let result = await axios.get(`${process.env.REACT_APP_LOCALHOST}/books`);
       console.log('result', result.data)

@@ -4,6 +4,8 @@ import Footer from './Footer';
 import Profile from './Profile'
 import BestBooks from './BestBooks';
 import Login from './Login'
+=======
+import BestBooks from './BestBooks';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router,Switch,Route,Link,
 } from "react-router-dom";
@@ -35,6 +37,7 @@ class App extends React.Component {
         <Router>
           <Header user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
+          <BestBooks />
             <Route exact path="/">
               {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
               {this.state.user ? <BestBooks/> : <Login loginHandler={this.loginHandler}/>}
@@ -43,6 +46,11 @@ class App extends React.Component {
             <Route exact path='/profile'>
               <Profile user={this.state.user} />
             </Route>
+=======
+            <Route exact path = "/profile">
+            {this.state.user}
+            </Route>
+            
           </Switch>
           <Footer />
         </Router>
