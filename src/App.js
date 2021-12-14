@@ -3,8 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Profile from './Profile'
 import BestBooks from './BestBooks';
-import Login from './Login'
-import BestBooks from './BestBooks';
+import Login from './Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router,Switch,Route,Link,
 } from "react-router-dom";
