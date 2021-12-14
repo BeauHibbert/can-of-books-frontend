@@ -10,9 +10,7 @@ class BestBooks extends React.Component {
       books: []
     }
   }
-
-   /* TODO: Make a GET request to your API to fetch books for the logged in user  */
-   fetchBooks = async () => {
+   
   /* TODO: Make a GET request to your API to fetch books for the logged in user  */
   fetchBooks = async () => {
     try {
@@ -24,14 +22,13 @@ class BestBooks extends React.Component {
     }
   }
 
-  componentDidMount(){
-    this.fetchBooks();
+  componentDidMount() {
+    this.getCats();
   }
 
+
+
   render() {
-
-    /* TODO: render user's books in a Carousel */
-
     return (
       <>
       {/* <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2> */}
