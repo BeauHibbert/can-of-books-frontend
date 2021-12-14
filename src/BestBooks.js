@@ -23,7 +23,7 @@ class BestBooks extends React.Component {
   }
 
   componentDidMount() {
-    this.getCats();
+    this.fetchBooks();
   }
 
 
