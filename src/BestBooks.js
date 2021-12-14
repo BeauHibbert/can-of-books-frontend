@@ -11,6 +11,8 @@ class BestBooks extends React.Component {
     }
   }
 
+   /* TODO: Make a GET request to your API to fetch books for the logged in user  */
+   fetchBooks = async () => {
   /* TODO: Make a GET request to your API to fetch books for the logged in user  */
   fetchBooks = async () => {
     try {
