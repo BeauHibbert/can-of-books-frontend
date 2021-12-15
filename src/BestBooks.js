@@ -1,9 +1,9 @@
 import React from 'react';
-import { Carousel,} from 'react-bootstrap';
+import { Carousel,Card} from 'react-bootstrap';
 import axios from 'axios';
 import './main.css';
 import BookFormModal from './BookFormModal';
-
+import DeleteButton from './DeleteButton';
 const url = process.env.REACT_APP_LOCALHOST
 
 class BestBooks extends React.Component {
@@ -76,12 +76,14 @@ this.makeBook(bookMaker);
       <>
       {/* <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2> */}
       {this.state.books.length > 0 ?
-       <div className='carousel-wrapper'>
+       <Card className='carousel-wrapper'>
+
          <Carousel>
         {/* {this.state.books.map((book) => <Carousel.Item><Carousel.Caption>{book.title}</Carousel.Caption></Carousel.Item>) } */}
-        {this.state.books.map((book) => <Carousel.Item>{book.title}: {book.description}</Carousel.Item>)}
+       
+        {this.state.books.map((book) => <Carousel.Item>{book.title}: {book.description} <DeleteButton deleteBook={this.deleteBook}/></Carousel.Item>)}
         </Carousel>
-       </div> : 
+       </Card> : 
        <p>Sorry, there are no books in this collection</p>
       }
       <BookFormModal books={this.state.books} handleSubmit={this.handleSubmit}/>

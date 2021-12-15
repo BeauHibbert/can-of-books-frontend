@@ -4,7 +4,7 @@ import { Form,Button} from 'react-bootstrap'
 class LoginForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
-   const user = {name: e.target.userName.value, email: e.target.email.value}
+  //  const user = {name: e.target.userName.value, email: e.target.email.value}
   //  this.props.loginHandler(user)
   }
 
