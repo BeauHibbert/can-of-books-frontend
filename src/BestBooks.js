@@ -13,8 +13,12 @@ class BestBooks extends React.Component {
    
   /* TODO: Make a GET request to your API to fetch books for the logged in user  */
   fetchBooks = async () => {
+    let url = `${process.env.REACT_APP_LOCALHOST}/books?`
+    if (this.props.user) {
+      url = `${process.env.REACT_APP_LOCALHOST}/books?email=${this.props.user.email}`
+    }
     try {
-      let result = await axios.get(`${process.env.REACT_APP_LOCALHOST}/books`);
+      let result = await axios.get(url);
       console.log('result', result.data)
       this.setState({books: result.data})
     }catch (error) {
