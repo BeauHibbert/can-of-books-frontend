@@ -16,8 +16,8 @@ Javascript,React,Mongodb
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
-12-13-2021: Backend and Database communicating with frontend. Added Bootstrap Carousel ternary operation and user ternary operation.
-12-14-2021: 11:45pm - Corrected merge conflicts and implemented create in the front end and create and delete in the backend.
+12-13-2021 - Backend and Database communicating with frontend. Added Bootstrap Carousel ternary operation and user ternary operation.
+12-14-2021 11:45pm - Corrected merge conflicts and implemented create in the front end and create and delete in the backend.
 
 ## Estimates
 <!-- See below -->
