@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import {Modal,Button,Form} from 'react-bootstrap'
+import {Modal,Button,Form,Container, } from 'react-bootstrap'
+
+
+
+
 export default class BookFormModal extends Component {
-
-
   render() {
     return (
       <div>
@@ -11,26 +13,31 @@ export default class BookFormModal extends Component {
             <Modal.Title>Modal title</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <Form onSubmit={this.handleSubmit}>
-              <Form.Group className="mb-3" controlId="BookTitle">
-                <Form.Label>Book Title</Form.Label>
-                <Form.Control type="text" placeholder="Enter Book Title" />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="BookDescription">
-                  <Form.Label>Book Description</Form.Label>
-                  <Form.Control type="text" placeholder="Enter Book Description" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formCheckbox">
-                    <Form.Check type="checkbox" label="Finished" />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                      Submit
-                      </Button>
-                      </Form>
+            <Container>
+        <Form onSubmit={this.props.handleSubmit}>
+          <Form.Group className="mb-3" controlId="title">
+            <Form.Label>Book Title</Form.Label>
+            <Form.Control type="text" placeholder="Book Title" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="description">
+            <Form.Label>Description</Form.Label>
+            <Form.Control type="text" placeholder="New York" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Label>email</Form.Label>
+            <Form.Control type="text" placeholder="email" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="status">
+            <Form.Check type="checkbox" label="Read?" />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Add a Book
+          </Button>
+        </Form>
+      </Container>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>Close</Button>
-                <Button variant="primary" onClick={save}>Save changes</Button>
+                <Button variant="primary" type="submit">Save changes</Button>
                 </Modal.Footer>
                 </Modal.Dialog>
       </div>
