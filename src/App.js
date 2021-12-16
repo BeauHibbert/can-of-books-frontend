@@ -6,9 +6,9 @@ import Footer from './Footer';
 import Header from './Header';
 import Login from './Login';
 import Profile from './Profile';
+import axios from 'axios';
 
-
-
+// const url = process.env.REACT_APP_LOCALHOST;
 
 class App extends React.Component {
 
@@ -23,7 +23,7 @@ class App extends React.Component {
   loginHandler = (user) => {
     this.setState({
       user: user,
-    })
+    }, this.getBooks)
   }
 
   logoutHandler = () => {
@@ -31,30 +31,74 @@ class App extends React.Component {
       user: null,
     })
   }
+  
+  // getBooks = async () => {
+  //   let url = `${process.env.REACT_APP_LOCALHOST}/books?`;
+  //   if (this.props.user) {
+  //     url = `${process.env.REACT_APP_LOCALHOST}/books?email=${this.state.user.email}`;
+  //   }
+  //   try {
+  //     let result = await axios.get(url);
+  //     console.log("result", result.data);
+  //     this.setState({ books: result.data });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // getBooks = async () => {
+  //   let url = `${process.env.REACT_APP_LOCALHOST}/books?`;
+  //   if (this.state.user) {
+  //     url = `${process.env.REACT_APP_LOCALHOST}/books?email=${this.state.user.email}`;
+  //     console.log('url if logged in', url);
+  //     // return url
+  //   }
+  //   try {
+  //     let result = await axios.get(url);
+  //     console.log("result", result.data);
+  //     this.setState({ books: result.data });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
 
+  // postBook = async (bookObj) => {
+  //   console.log('bookObj in postBook: ', bookObj)
+  //   try {
+  //     const bookResponse = await axios.post(
+  //       `${process.env.REACT_APP_LOCALHOST}/books?email=${this.state.user.email}`,
+  //       bookObj
+  //     );
+  //     this.setState({ books: [...this.state.books, bookResponse.data] });
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
+
+  // componentDidMount() {
+  //   this.getBooks();
+  // }
 
   render() {
     return (
       <>
         <Router>
-          <Header user={this.state.user} onLogout={this.logoutHandler} />
+          <Header user={this.state.user} onLogout={this.logoutHandler}  />
           <Switch>
-          <BestBooks />
             <Route exact path="/">
               {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
-              {this.state.user ? <BestBooks /> : <Login loginHandler={this.loginHandler}/> }
-              {/* {this.state.user} books={this.state.books}/> : <Login loginHandler={this.loginHandler}/>; */}
+              {this.state.user ? <BestBooks deleteBook={this.deleteBook} books={this.state.books} user={this.state.user}/> : <Login loginHandler={this.loginHandler}/> }
+
             </Route>
             {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
-             {/* <Route exact path='/profile'> */}
-               {/* <Profile user={this.state.user} /> */}
-             {/* </Route> */}
-             {/* <Route exact path = "/profile"> */}
-             {/* {this.state.user} */}
-             {/* </Route> */}
-
-          </Switch>
+            {this.state.user ? 
+            <Profile exact path="/profile"
+            name={this.state.user.name}
+            email={this.state.user.email}>
+              </Profile> : <div></div>
+              }
+              </Switch>
           <Footer />
         </Router>
       </>
