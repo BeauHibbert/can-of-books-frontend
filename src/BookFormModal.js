@@ -1,46 +1,48 @@
-import React, { Component } from 'react'
-import {Modal,Button,Form,Container, } from 'react-bootstrap'
-
-
-
+import React, { Component } from "react";
+import { Button, Container, Form, Modal } from "react-bootstrap";
 
 export default class BookFormModal extends Component {
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const newBook = {
+      title: e.target.title.value,
+      description: e.target.description.value,
+      status: e.target.status.value,
+    };
+    this.props.postBook(newBook);
+    this.props.closeModal();
+  };
   render() {
     return (
       <div>
-        <Modal.Dialog>
+        <Modal show={this.props.showModal} onhide={this.props.closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>Modal title</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+          </Modal.Header>
+          <Modal.Body>
             <Container>
-        <Form onSubmit={this.props.handleSubmit}>
-          <Form.Group className="mb-3" controlId="title">
-            <Form.Label>Book Title</Form.Label>
-            <Form.Control type="text" placeholder="Book Title" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Description</Form.Label>
-            <Form.Control type="text" placeholder="New York" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="email">
-            <Form.Label>email</Form.Label>
-            <Form.Control type="text" placeholder="email" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="status">
-            <Form.Check type="checkbox" label="Read?" />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Add a Book
-          </Button>
-        </Form>
-      </Container>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="primary" type="submit">Save changes</Button>
-                </Modal.Footer>
-                </Modal.Dialog>
+              <Form onSubmit={this.handleSubmit}>
+                <Form.Group className='mb-3' controlId='title'>
+                  <Form.Label>Book Title</Form.Label>
+                  <Form.Control type='text' placeholder='Book Title' />
+                </Form.Group>
+                <Form.Group className='mb-3' controlId='description'>
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control type='text' placeholder='Book Description' />
+                </Form.Group>
+                <Form.Group className='mb-3' controlId='status'>
+                  <Form.Label type='checkbox' label='Read?' />
+                  <Form.Control type='text' placeholder='Read/UnRead' />
+                </Form.Group>
+                <Button variant='primary' type='submit'>
+                  Add a Book
+                </Button>
+              </Form>
+            </Container>
+          </Modal.Body>
+          <Modal.Footer></Modal.Footer>
+        </Modal>
       </div>
-    )
+    );
   }
 }
