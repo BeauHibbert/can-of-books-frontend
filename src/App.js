@@ -1,12 +1,11 @@
-import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import Profile from './Profile'
-import BestBooks from './BestBooks';
-import Login from './Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter as Router,Switch,Route,
-} from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import BestBooks from './BestBooks';
+import Footer from './Footer';
+import Header from './Header';
+import Login from './Login';
+import Profile from './Profile';
 
 
 
@@ -23,7 +22,7 @@ class App extends React.Component {
 
   loginHandler = (user) => {
     this.setState({
-      user,
+      user: user,
     })
   }
 
@@ -44,16 +43,17 @@ class App extends React.Component {
           <BestBooks />
             <Route exact path="/">
               {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
-              {this.state.user ? <BestBooks user={this.state.user} books={this.state.books}/> : <Login loginHandler={this.loginHandler}/>}
+              {this.state.user ? <BestBooks /> : <Login loginHandler={this.loginHandler}/> }
+              {/* {this.state.user} books={this.state.books}/> : <Login loginHandler={this.loginHandler}/>; */}
             </Route>
             {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
-            <Route exact path='/profile'>
-              <Profile user={this.state.user} />
-            </Route>
-            <Route exact path = "/profile">
-            {this.state.user}
-            </Route>
-            
+             {/* <Route exact path='/profile'> */}
+               {/* <Profile user={this.state.user} /> */}
+             {/* </Route> */}
+             {/* <Route exact path = "/profile"> */}
+             {/* {this.state.user} */}
+             {/* </Route> */}
+
           </Switch>
           <Footer />
         </Router>
