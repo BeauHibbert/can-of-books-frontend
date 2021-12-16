@@ -6,9 +6,9 @@ import Footer from './Footer';
 import Header from './Header';
 import Login from './Login';
 import Profile from './Profile';
-import axios from 'axios';
 
-// const url = process.env.REACT_APP_LOCALHOST;
+
+
 
 class App extends React.Component {
 
