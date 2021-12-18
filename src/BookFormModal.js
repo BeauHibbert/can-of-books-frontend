@@ -10,7 +10,7 @@ export default class BookFormModal extends Component {
       status: e.target.status.value,
     };
     this.props.postBook(newBook);
-    // this.props.closeModal();
+    this.props.closeModal();
   };
   render() {
     return (
