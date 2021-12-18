@@ -15,6 +15,7 @@ class BestBooks extends React.Component {
       showModal: false,
       // showUpdateModal: false,
     };
+    this.closeModal = this.closeModal.bind();  
   }
 
   handleSubmit = (e) => {
