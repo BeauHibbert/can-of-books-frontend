@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import BookCarousel from "./BookCarousel";
 import BookFormModal from "./BookFormModal";
-// import UpdateModal from "./UpdateModal";
+import UpdateModal from "./UpdateModal";
 import "./main.css";
 import { withAuth0 } from '@auth0/auth0-react';
 
@@ -43,6 +43,14 @@ class BestBooks extends React.Component {
     this.setState({ showModal: false });
   };
 
+  // handleUpdateModalClick = () => {
+  //   this.setState({showUpdateModal: true});
+  // }
+
+  // closeUpdateModal = () => {
+  //   this.setState({showUpdateModal: false});
+  // }
+
   /* TODO: Make a GET request to your API to fetch books for the logged in user  */
   getBooks = async () => {
     if (this.props.auth0.isAuthenticated) {
@@ -62,6 +70,7 @@ class BestBooks extends React.Component {
 
     }
   }
+
   deleteBook = async (id) => {
     if (this.props.auth0.isAuthenticated) {
       const res = await this.props.auth0.getIdTokenClaims();
@@ -76,9 +85,10 @@ class BestBooks extends React.Component {
       }
     try {
       await axios(config)
-
+      console.log('this.state.books before delete', this.state.books)
       const updatedBooks = this.state.books.filter(book => book._id !== id);
       this.setState({ books: updatedBooks });
+      console.log('this.state.books after delete', this.state.books)
     } catch (e) {
       console.error(e);
     }
@@ -96,7 +106,7 @@ class BestBooks extends React.Component {
         method: 'post',
         baseURL: process.env.REACT_APP_LOCALHOST,
         url: '/books',
-        data:userBook,
+        data: userBook,
         headers: { "Authorization": `Bearer ${jwt}`}
       }
     try {
@@ -108,21 +118,19 @@ class BestBooks extends React.Component {
   };
 }
 
-  updateBook = async (updatedBook, id) => {
+  updateBook = async (id) => {
     if (this.props.auth0.isAuthenticated) {
       const res = await this.props.auth0.getIdTokenClaims();
-
       const jwt = res.__raw; //json web token
+ 
       const config = {
         method: 'put',
         baseURL: process.env.REACT_APP_LOCALHOST,
         url: `/books/${id}`,
-        data:updatedBook,
-        //responding with the json token
         headers: { "Authorization": `Bearer ${jwt}`}
-
       }
-      try{
+
+      try {
       const updateBook = await axios(config)
       const newBookState = this.state.books.map(book => {
         if (book._id === id) {
@@ -130,9 +138,11 @@ class BestBooks extends React.Component {
         }
         return book;
       })
+      console.log('newBookState', newBookState)
       this.setState({books: newBookState})
-    }catch (e) {
+    } catch (e) {
       console.error(e)
+      console.log('error updating book')
     }
   }
 }
@@ -145,16 +155,18 @@ class BestBooks extends React.Component {
     return (
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-        
+        {/* <UpdateModal /> */}
         {this.state.books.length ? (
-          <BookCarousel  deleteBook={this.deleteBook} books={this.state.books} updateBook={this.updateBook} showModal={this.state.showModal} onClick={this.handleClick} closeModal={this.closeModal} postBook={this.postBook} /> 
+          // <BookCarousel  deleteBook={this.deleteBook} books={this.state.books} updateBook={this.updateBook} showModal={this.state.showModal} onClick={this.handleClick} closeModal={this.closeModal} postBook={this.postBook}/> 
+          <BookCarousel  deleteBook={this.deleteBook} books={this.state.books} updateBook={this.updateBook}  postBook={this.postBook}/> 
           ) : (
           <p>Sorry, there are no books in this collection</p>
         )}
         {this.state.showModal ? (
           <BookFormModal showModal={this.state.showModal} onClick={this.handleClick} closeModal={this.closeModal} postBook={this.postBook}/>
         ) : (
-          <Button onClick={this.handleClick}>Add a book</Button>)}
+          <Button onClick={this.handleClick}>Add a book</Button>
+        )}
       </>
       )  
     }

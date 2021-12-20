@@ -13,7 +13,7 @@ class Login extends React.Component {
   render() {
     
     return (
-      <Card Style={{width: '18rem'}}>
+      <Card style={{width: '18rem'}}>
         <Card.Body>
           <Card.Title>Login</Card.Title>
           <Card.Text>

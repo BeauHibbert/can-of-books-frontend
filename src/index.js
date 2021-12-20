@@ -12,10 +12,8 @@ ReactDOM.render(
   redirectUri={process.env.REACT_APP_AUTH_REDIRECT_URI} 
   >
   <App />
+  
   </Auth0Provider>,
   document.getElementById("root")
 );
 
-// REACT_APP_AUTH_REDIRECT_URI=http://localhost:3000
-// REACT_APP_AUTH_CLIENT_ID=Qh5pRbU61FFINMrtIIXDitCeNorpqGss
-// REACT_APP_AUTH_DOMAIN=dev-blv0mz5h.us.auth0.com
