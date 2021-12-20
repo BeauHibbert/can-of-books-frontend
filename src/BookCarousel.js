@@ -31,10 +31,9 @@ export default class BookCarousel extends Component {
                 books={this.props.books}
                 postBook={this.props.postBook}
               />
-              
-              <Carousel.Caption>
-                
-              </Carousel.Caption>
+              {/* <Carousel.Caption>
+                This is a carousel caption
+              </Carousel.Caption> */}
             </Carousel.Item>
           ))}
         </Carousel>

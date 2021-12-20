@@ -3,7 +3,6 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import BookCarousel from "./BookCarousel";
 import BookFormModal from "./BookFormModal";
-import UpdateModal from "./UpdateModal";
 import "./main.css";
 import { withAuth0 } from '@auth0/auth0-react';
 
@@ -14,8 +13,7 @@ class BestBooks extends React.Component {
     super(props);
     this.state = {
       books: [],
-      showModal: false,
-      // showUpdateModal: false,
+      showModal: false
     };
     this.closeModal = this.closeModal.bind();  
   }
@@ -42,14 +40,6 @@ class BestBooks extends React.Component {
   closeModal = () => {
     this.setState({ showModal: false });
   };
-
-  // handleUpdateModalClick = () => {
-  //   this.setState({showUpdateModal: true});
-  // }
-
-  // closeUpdateModal = () => {
-  //   this.setState({showUpdateModal: false});
-  // }
 
   /* TODO: Make a GET request to your API to fetch books for the logged in user  */
   getBooks = async () => {
@@ -118,28 +108,34 @@ class BestBooks extends React.Component {
   };
 }
 
-  updateBook = async (id) => {
+  updateBook = async (updatedBook) => {
     if (this.props.auth0.isAuthenticated) {
+      console.log('book obj getting passed into update', updatedBook)
+      console.log('id getting passed into updateBook', updatedBook.id);
       const res = await this.props.auth0.getIdTokenClaims();
       const jwt = res.__raw; //json web token
  
       const config = {
         method: 'put',
         baseURL: process.env.REACT_APP_LOCALHOST,
-        url: `/books/${id}`,
+        url: `/books/${updatedBook.id}`,
         headers: { "Authorization": `Bearer ${jwt}`}
       }
 
       try {
-      const updateBook = await axios(config)
-      const newBookState = this.state.books.map(book => {
-        if (book._id === id) {
+        const updateBook = await axios(config)
+        const newBookState = this.state.books.map(book => {
+        if (book._id === updatedBook.id) {
+          book.title = updatedBook.title;
+          book.description = updatedBook.description;
+          book.status = updatedBook.status;
+          console.log('updated book in updateBook func (old)', book)
           return updateBook.data;
         }
         return book;
       })
-      console.log('newBookState', newBookState)
       this.setState({books: newBookState})
+      console.log('this.state.books after update: ', this.state.books)
     } catch (e) {
       console.error(e)
       console.log('error updating book')
@@ -155,9 +151,7 @@ class BestBooks extends React.Component {
     return (
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-        {/* <UpdateModal /> */}
         {this.state.books.length ? (
-          // <BookCarousel  deleteBook={this.deleteBook} books={this.state.books} updateBook={this.updateBook} showModal={this.state.showModal} onClick={this.handleClick} closeModal={this.closeModal} postBook={this.postBook}/> 
           <BookCarousel  deleteBook={this.deleteBook} books={this.state.books} updateBook={this.updateBook}  postBook={this.postBook}/> 
           ) : (
           <p>Sorry, there are no books in this collection</p>
