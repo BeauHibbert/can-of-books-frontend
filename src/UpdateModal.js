@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Modal,Container,Form,Button } from 'react-bootstrap';
+
 export default class UpdateModal extends Component {
   handleSubmit = (e) => {
     // console.log('hitting here')

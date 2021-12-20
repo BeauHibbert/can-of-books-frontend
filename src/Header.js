@@ -3,7 +3,7 @@ import { Navbar, NavItem } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import './Header.css';
 import LogoutButton from './LogoutButton'
-import LoginButton from './LoginButton'
+import { withAuth0 } from '@auth0/auth0-react'
 
 class Header extends React.Component {
   render() {
@@ -11,13 +11,11 @@ class Header extends React.Component {
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand>My Favorite Books</Navbar.Brand>
         <NavItem><Link to="/" className="nav-link">Home</Link></NavItem>
-        {/* TODO: if the user is logged in, render a navigation link to profile page */}
-        {this.props.user ? <NavItem><Link to='/profile' className="profile-link"></Link></NavItem> : null }
-        {/* TODO: if the user is logged in, render the `LogoutButton` */}
-        {this.props.user ? <LogoutButton onLogout={this.props.onLogout}/> : <LoginButton onLogin={this.props.onLogin}/> }
+        <NavItem>{this.props.auth0.isAuthenticated && <Link to="/profile" className="nav-link">Profile</Link>} </NavItem>
+        <NavItem>{this.props.auth0.isAuthenticated && <LogoutButton />}</NavItem>
       </Navbar>
     )
   }
 }
 
-export default Header;
+export default withAuth0(Header);

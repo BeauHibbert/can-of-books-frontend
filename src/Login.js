@@ -4,7 +4,14 @@ import './Login.css';
 import LoginButton from './LoginButton';
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    showButton: true
+  }
+}
   render() {
+    
     return (
       <Card Style={{width: '18rem'}}>
         <Card.Body>
@@ -12,7 +19,7 @@ class Login extends React.Component {
           <Card.Text>
             Click Below to Log in
             </Card.Text>
-            <LoginButton loginHandler={this.props.loginHandler}/>
+            <LoginButton loginHandler={this.props.loginHandler} showButton={this.state.showButton}/>
             </Card.Body>
             </Card>
     )
